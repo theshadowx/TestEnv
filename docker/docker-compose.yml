@@ -1,0 +1,41 @@
+# Persistence layer: Mongo
+db:
+  build: mongo
+  log_driver: "json-file"
+  volumes:
+    - /data/db/:/data/db/
+  expose:
+    - "27017"
+
+#--------------------------------------------------------
+# Application server: NodeJS (Meteor)
+server:
+  build: meteor
+  log_driver: "json-file"
+  environment:
+    - MONGO_URL=mongodb://db:27017
+    - MONGO_OPLOG_URL=mongodb://db:27017/local
+    - ROOT_URL=https://127.0.0.1:3000
+  volumes:
+    - /etc/meteor:/etc/meteor
+    - /vagrant/app/:/app/
+  ports:
+    - "3000:3000"
+  expose:
+    - "3000"
+  links:
+    - db
+
+#-----------------------------------------------------
+# Front layer, qt
+front:
+  log_driver: "json-file"
+  environment:
+    - METEOR_URL=server:3000
+  links:
+    - server
+  build: qtarduino
+  volumes:
+    - /vagrant/app/:/app/
+
+
