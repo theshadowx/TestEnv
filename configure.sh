@@ -29,4 +29,4 @@ echo "$HOME/.ssh/id_rsa_vagrant" | ssh-keygen -t rsa -P "" -f $(< /dev/stdin)
 cp $HOME/.ssh/id_rsa_vagrant.pub $(pwd)/.ssh
 ssh -i ~/.vagrant.d/insecure_private_key vagrant@$HOST_IP_TEST "sudo cp /vagrant/.ssh/id_rsa_vagrant.pub /root/.ssh/authorized_keys"
 
-./config_dev.sh
+./config_test.sh
