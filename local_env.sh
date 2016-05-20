@@ -1,1 +1,1 @@
-set -x HOST_IP_DEV '192.168.1.50'
+set -x HOST_IP_TEST '192.168.1.50'
