@@ -82,7 +82,22 @@ To Shut down the virtual machine containing the test environment
 $ vagrant halt test
 ```
 
+## Troubleshooting
+While pulling one of the images, you might get :
+```
+ERROR: Get https://registry-1.docker.io/v2/theshadowx/testenv/manifests/meteor: Get https://auth.docker.io/token?account=theshadowx&scope=repository%3Atheshadowx%2Ftestenv%3Apull&service=registry.docker.io: dial tcp: lookup auth.docker.io on 10.0.2.3:53: no such host
 
+```
+
+The solution for this issue is to restart the docker machine:
+```
+$ docker-machine restart test && eval "$(docker-machine env test)"
+```
+
+Then pull the image that was not pulled
+```
+$ docker-compose -f ./docker/docker-compose.yml pull #db, server or front
+```
 
 ## Aknowledgement
 
