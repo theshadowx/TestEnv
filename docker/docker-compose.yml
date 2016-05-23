@@ -1,6 +1,6 @@
 # Persistence layer: Mongo
 db:
-  build: mongo
+  build: theshadowx/testenv:mongo
   log_driver: "json-file"
   volumes:
     - /data/db/:/data/db/
@@ -10,7 +10,7 @@ db:
 #--------------------------------------------------------
 # Application server: NodeJS (Meteor)
 server:
-  build: meteor
+  build: theshadowx/testenv:meteor
   log_driver: "json-file"
   environment:
     - MONGO_URL=mongodb://db:27017
@@ -29,12 +29,12 @@ server:
 #-----------------------------------------------------
 # Front layer, qt
 front:
+  build: theshadowx/testenv:qtarduino
   log_driver: "json-file"
   environment:
     - METEOR_URL=server:3000
   links:
     - server
-  build: qtarduino
   volumes:
     - /vagrant/app/:/app/
 
