@@ -29,10 +29,7 @@ echo "--------->  Building Mongo -----------------------------"
 ssh root@$HOST_IP_TEST "rm -rf /var/db; mkdir -p /data/db; chmod go+w /data/db"
 
 # building our Mongo Docker image:
-docker-compose -f ./docker/docker-compose.yml up -d db
-
-# And once it's running, initialize a single instance ReplicaSet for making Oplog tailing available:
-docker-compose -f ./docker/docker-compose.yml run --rm db mongo db:27017/admin --quiet --eval "rs.initiate(); rs.conf();"
+docker-compose -f ./docker/docker-compose.yml pull db
 
 echo "--------->  Building Meteor -----------------------------"
 
@@ -41,8 +38,8 @@ ssh root@$HOST_IP_TEST "mkdir -p /etc/meteor"
 # copy your settings.json files on each hosts using a regular SCP. Mine are slightly different depending on the target where I deploy my Meteor apps.
 # scp ../app/test.json root@$HOST_IP_TEST:/etc/meteor/settings.json
 
-docker-compose -f ./docker/docker-compose.yml up -d db server 
+docker-compose -f ./docker/docker-compose.yml pull server 
 
 echo "--------->  Building Qt+Android -----------------------------"
 
-docker-compose -f ./docker/docker-compose.yml build front
+docker-compose -f ./docker/docker-compose.yml pull front
