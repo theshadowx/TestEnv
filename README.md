@@ -1,5 +1,5 @@
 # TestEnv
-Test Environment using Docker &amp; Vagrant
+Test Environment using Docker &amp; Vagrant for Qt/QML app using Meteor/MongoDB
 
 ## Structure
 
