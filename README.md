@@ -79,7 +79,7 @@ $ docker-compose -f ./docker/docker-compose.yml logs
 
 To Shut down the virtual machine containing the test environment
 ```
-$ Vagrant halt test
+$ vagrant halt test
 ```
 
 
