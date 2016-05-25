@@ -49,6 +49,7 @@ RUN curl https://install.meteor.com/ | sh
 # RUN locale-gen en_US.UTF-8 \
 #     && localedef -i en_GB -f UTF-8 en_US.UTF-8 
 
+RUN mkdir -p /app/server
 WORKDIR /app/server
 
 EXPOSE 3000
